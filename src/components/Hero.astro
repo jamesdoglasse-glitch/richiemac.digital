@@ -5,25 +5,88 @@
     <div class="grid-bg"></div>
     <svg class="orbit-svg" viewBox="0 0 1250 294" preserveAspectRatio="xMidYMid meet">
       <defs>
-        <radialGradient id="planet-grad" cx="32%" cy="28%" r="70%">
+        <radialGradient id="orbit-fill" cx="50%" cy="50%" r="55%">
+          <stop offset="0%" stop-color="rgba(0,230,118,0.18)" />
+          <stop offset="55%" stop-color="rgba(0,230,118,0.09)" />
+          <stop offset="100%" stop-color="rgba(0,230,118,0.0)" />
+        </radialGradient>
+        <radialGradient id="moon-grad" cx="32%" cy="28%" r="70%">
           <stop offset="0%" stop-color="#d3ffe2" />
           <stop offset="25%" stop-color="#6cf2a7" />
           <stop offset="55%" stop-color="#00e676" />
           <stop offset="100%" stop-color="#007a36" />
         </radialGradient>
-        <radialGradient id="planet-shade" cx="72%" cy="80%" r="65%">
+        <radialGradient id="moon-shade" cx="72%" cy="80%" r="65%">
           <stop offset="0%" stop-color="rgba(0,0,0,0.55)" />
           <stop offset="100%" stop-color="rgba(0,0,0,0)" />
         </radialGradient>
+        <radialGradient id="fist-grad" cx="35%" cy="22%" r="85%">
+          <stop offset="0%" stop-color="#1f4a30" />
+          <stop offset="35%" stop-color="#0e2a1a" />
+          <stop offset="75%" stop-color="#06180e" />
+          <stop offset="100%" stop-color="#020806" />
+        </radialGradient>
       </defs>
+
+      <!-- Tinted fill inside the orbit + solid outer ring -->
       <ellipse cx="625" cy="147" rx="624" ry="146"
-        fill="none" stroke="rgba(0,230,118,0.28)" stroke-dasharray="6 6" />
+        fill="url(#orbit-fill)"
+        stroke="rgba(0,230,118,0.36)" stroke-width="1.5" />
+      <!-- Inner dashed ring, inset -->
+      <ellipse cx="625" cy="147" rx="582" ry="124"
+        fill="none" stroke="rgba(0,230,118,0.22)"
+        stroke-dasharray="6 6" />
+
+      <!-- Central fist, middle finger up — counter-rotated to stay upright -->
+      <g class="fist" transform="translate(625 147) rotate(14)">
+        <!-- soft drop shadow under fist -->
+        <ellipse cx="0" cy="72" rx="66" ry="9" fill="rgba(0,0,0,0.4)" />
+
+        <!-- MIDDLE FINGER — tall, clearly extended -->
+        <rect x="-18" y="-138" width="36" height="115" rx="17" fill="url(#fist-grad)" />
+        <!-- two joint creases up the finger -->
+        <path d="M -13 -108 Q 0 -103 13 -108" stroke="rgba(0,0,0,0.28)" stroke-width="2" fill="none" stroke-linecap="round" />
+        <path d="M -13 -72 Q 0 -67 13 -72" stroke="rgba(0,0,0,0.28)" stroke-width="2" fill="none" stroke-linecap="round" />
+        <!-- knuckle (base of middle finger meeting hand) -->
+        <path d="M -17 -28 Q 0 -22 17 -28" stroke="rgba(0,0,0,0.35)" stroke-width="2.5" fill="none" stroke-linecap="round" />
+        <!-- fingernail highlight -->
+        <ellipse cx="0" cy="-125" rx="11" ry="6.5" fill="rgba(180,255,210,0.22)" />
+
+        <!-- curled-down fingers showing on either side of middle finger -->
+        <!-- left (index) -->
+        <rect x="-50" y="-38" width="26" height="24" rx="11" fill="url(#fist-grad)" />
+        <path d="M -46 -32 Q -37 -34 -28 -32" stroke="rgba(0,0,0,0.3)" stroke-width="1.8" fill="none" stroke-linecap="round" />
+        <!-- right (ring + pinky as one bump) -->
+        <rect x="24" y="-38" width="26" height="24" rx="11" fill="url(#fist-grad)" />
+        <path d="M 28 -32 Q 37 -34 46 -32" stroke="rgba(0,0,0,0.3)" stroke-width="1.8" fill="none" stroke-linecap="round" />
+
+        <!-- fist body / palm -->
+        <rect x="-54" y="-20" width="108" height="88" rx="24" fill="url(#fist-grad)" />
+
+        <!-- knuckle dimples (front of folded fingers) -->
+        <circle cx="-32" cy="-6" r="6.5" fill="rgba(0,0,0,0.2)" />
+        <circle cx="-10" cy="-9" r="6.5" fill="rgba(0,0,0,0.2)" />
+        <circle cx="10"  cy="-9" r="6.5" fill="rgba(0,0,0,0.2)" />
+        <circle cx="32"  cy="-6" r="6.5" fill="rgba(0,0,0,0.2)" />
+
+        <!-- thumb folded across the front -->
+        <ellipse cx="-48" cy="22" rx="17" ry="32" fill="url(#fist-grad)"
+          transform="rotate(-14 -48 22)" />
+        <!-- thumbnail highlight -->
+        <ellipse cx="-60" cy="2" rx="5" ry="9" fill="rgba(180,255,210,0.18)"
+          transform="rotate(-14 -48 22)" />
+
+        <!-- top highlight on knuckle line -->
+        <ellipse cx="0" cy="-4" rx="40" ry="4" fill="rgba(180,255,210,0.10)" />
+      </g>
+
+      <!-- Orbiting moon -->
       <g class="orbit-mover">
         <g class="planet-spin">
-          <circle r="22" fill="url(#planet-grad)" />
+          <circle r="22" fill="url(#moon-grad)" />
           <ellipse cx="-7" cy="-3" rx="7" ry="3" fill="rgba(0,0,0,0.36)" transform="rotate(-18)" />
           <ellipse cx="6" cy="7" rx="5" ry="2.4" fill="rgba(0,0,0,0.28)" transform="rotate(14)" />
-          <circle r="22" fill="url(#planet-shade)" />
+          <circle r="22" fill="url(#moon-shade)" />
         </g>
       </g>
     </svg>
@@ -87,10 +150,10 @@
   .orbit-svg {
     position: absolute;
     left: 50%;
-    top: 62%;
+    top: 42%;
     width: min(110vw, 1250px);
     aspect-ratio: 1250 / 294;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) rotate(-14deg);
     overflow: visible;
   }
 
@@ -175,10 +238,12 @@
     flex-wrap: wrap;
     gap: 0.75rem;
     margin-top: 2.25rem;
+    justify-content: center;
   }
 
   .micro {
     margin-top: 2rem;
     font-size: 0.88rem;
+    text-align: center;
   }
 </style>
