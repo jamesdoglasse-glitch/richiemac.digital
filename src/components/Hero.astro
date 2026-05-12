@@ -3,8 +3,12 @@
 <section class="hero" id="top">
   <div class="orbit" aria-hidden="true">
     <div class="grid-bg"></div>
-    <div class="moon"></div>
-    <div class="ellipse"></div>
+    <div class="orbit-system">
+      <div class="ellipse"></div>
+      <div class="planet">
+        <div class="planet-surface"></div>
+      </div>
+    </div>
   </div>
 
   <div class="wrap inner">
@@ -60,36 +64,83 @@
     -webkit-mask-image: radial-gradient(ellipse 60% 55% at 50% 45%, #000 30%, transparent 75%);
   }
 
-  .ellipse {
+  /* Fixed 1250x294 coordinate space, scaled uniformly so the planet's
+     offset-path and the dashed ring share the same geometry. */
+  .orbit-system {
+    --orbit-w: min(110vw, 1250px);
+    --orbit-s: calc(var(--orbit-w) / 1250);
     position: absolute;
     left: 50%;
     top: 62%;
-    transform: translate(-50%, -50%);
-    width: min(1250px, 110vw);
-    aspect-ratio: 1250 / 294;
-    border: 1px dashed rgba(0, 230, 118, 0.22);
+    width: 1250px;
+    height: 294px;
+    transform: translate(-50%, -50%) scale(var(--orbit-s));
+    transform-origin: center center;
+  }
+
+  .ellipse {
+    position: absolute;
+    inset: 0;
+    border: 1px dashed rgba(0, 230, 118, 0.28);
     border-radius: 50%;
   }
 
-  .moon {
+  .planet {
     position: absolute;
-    left: 50%;
-    top: 62%;
-    transform: translate(-50%, -50%);
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 32% 30%, #b9ffd4, #00e676 55%, #008a3d);
-    box-shadow:
-      0 0 32px 4px rgba(0, 230, 118, 0.55),
-      inset -3px -2px 6px rgba(0, 0, 0, 0.35);
-    offset-path: path("M 625 147 a 625 147 0 1 1 -1250 0 a 625 147 0 1 1 1250 0");
+    left: 0;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    margin: -20px 0 0 -20px;
+    /* Path centered at (625, 147) — the dead center of the 1250x294 box,
+       so it exactly traces the dashed ellipse perimeter. */
+    offset-path: path("M 1250 147 a 625 147 0 1 1 -1250 0 a 625 147 0 1 1 1250 0");
     offset-rotate: 0deg;
     animation: orbit 16s linear infinite reverse;
+    filter: drop-shadow(0 0 18px rgba(0, 230, 118, 0.45));
+  }
+
+  .planet-surface {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 32% 28%, #d3ffe2 0%, #6cf2a7 25%, #00e676 55%, #007a36 100%);
+    box-shadow: inset -4px -3px 8px rgba(0, 0, 0, 0.45);
+    overflow: hidden;
+    animation: spin 5s linear infinite;
+  }
+  /* Surface "features" so the axial spin is visible. */
+  .planet-surface::before,
+  .planet-surface::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.38), transparent 70%);
+  }
+  .planet-surface::before {
+    left: 14%;
+    top: 22%;
+    width: 30%;
+    height: 22%;
+    transform: rotate(-22deg);
+  }
+  .planet-surface::after {
+    left: 52%;
+    top: 56%;
+    width: 26%;
+    height: 18%;
+    transform: rotate(14deg);
+    opacity: 0.7;
   }
 
   @keyframes orbit {
     to { offset-distance: 100%; }
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
   }
 
   .inner {
