@@ -1,6 +1,16 @@
 ---
 import Logo from './Logo.astro';
+const ticker = ['Web Design', 'Development', 'Performance', 'SEO', 'AI Automation', 'Brand'];
 ---
+<div class="topbar" aria-hidden="true">
+  <div class="marquee">
+    <div class="track">
+      {[...ticker, ...ticker, ...ticker].map((item) => (
+        <span>{item}</span>
+      ))}
+    </div>
+  </div>
+</div>
 <header class="site-header">
   <div class="wrap inner">
     <Logo />
@@ -15,14 +25,92 @@ import Logo from './Logo.astro';
 </header>
 
 <style>
+  .topbar {
+    background: linear-gradient(90deg,
+      var(--green-deep) 0%,
+      var(--green) 35%,
+      var(--green-soft) 50%,
+      var(--green) 65%,
+      var(--green-deep) 100%);
+    color: #04140b;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.35);
+    position: relative;
+    z-index: 51;
+  }
+  .topbar::before,
+  .topbar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .topbar::before {
+    left: 0;
+    background: linear-gradient(90deg, var(--green-deep), transparent);
+  }
+  .topbar::after {
+    right: 0;
+    background: linear-gradient(-90deg, var(--green-deep), transparent);
+  }
+  .marquee {
+    width: 100%;
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
+  }
+  .track {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    animation: marquee 42s linear infinite;
+    will-change: transform;
+  }
+  .track span {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 0.74rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 0 2rem;
+    display: inline-flex;
+    align-items: center;
+  }
+  .track span::after {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #04140b;
+    margin-left: 2rem;
+    opacity: 0.55;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-100% / 3)); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .track { animation: none; }
+  }
+
   .site-header {
     position: sticky;
     top: 0;
     z-index: 50;
-    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    background: linear-gradient(180deg,
+      color-mix(in srgb, var(--green-deep) 18%, var(--bg)) 0%,
+      color-mix(in srgb, var(--bg) 92%, transparent) 100%);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--line);
+    box-shadow: 0 1px 0 0 color-mix(in srgb, var(--green) 22%, transparent) inset;
   }
   .inner {
     display: flex;
@@ -40,11 +128,25 @@ import Logo from './Logo.astro';
     font-size: 0.92rem;
     color: var(--muted);
     transition: color 0.15s ease;
+    position: relative;
   }
-  nav a:hover { color: var(--text); }
+  nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 100%;
+    bottom: -4px;
+    height: 1px;
+    background: var(--green);
+    transition: right 0.25s ease;
+  }
+  nav a:hover { color: var(--green); }
+  nav a:hover::after { right: 0; }
   .cta { margin-left: auto; }
   @media (max-width: 720px) {
     nav { display: none; }
     .cta { margin-left: auto; padding: 0.65rem 1rem; font-size: 0.88rem; }
+    .track span { padding: 0 1.2rem; font-size: 0.68rem; }
+    .track span::after { margin-left: 1.2rem; }
   }
 </style>

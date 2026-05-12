@@ -80,13 +80,55 @@
         <ellipse cx="0" cy="-4" rx="40" ry="4" fill="rgba(180,255,210,0.10)" />
       </g>
 
-      <!-- Orbiting moon -->
-      <g class="orbit-mover">
-        <g class="planet-spin">
-          <circle r="22" fill="url(#moon-grad)" />
-          <ellipse cx="-7" cy="-3" rx="7" ry="3" fill="rgba(0,0,0,0.36)" transform="rotate(-18)" />
-          <ellipse cx="6" cy="7" rx="5" ry="2.4" fill="rgba(0,0,0,0.28)" transform="rotate(14)" />
-          <circle r="22" fill="url(#moon-shade)" />
+      <!-- Two orbiting fists, one chasing the other -->
+      <g class="orbit-mover orbit-fist-lead">
+        <g class="mini-fist" transform="rotate(14)">
+          <!-- soft drop shadow -->
+          <ellipse cx="0" cy="22" rx="22" ry="3" fill="rgba(0,0,0,0.45)" />
+          <!-- curled fingers nubs on either side -->
+          <rect x="-22" y="-2" width="13" height="11" rx="5.5" fill="url(#fist-grad)" />
+          <rect x="9" y="-2" width="13" height="11" rx="5.5" fill="url(#fist-grad)" />
+          <!-- palm body -->
+          <rect x="-22" y="6" width="44" height="20" rx="9" fill="url(#fist-grad)" />
+          <!-- knuckle dimples -->
+          <circle cx="-13" cy="3.5" r="2.4" fill="rgba(0,0,0,0.28)" />
+          <circle cx="-4.5" cy="2" r="2.4" fill="rgba(0,0,0,0.28)" />
+          <circle cx="4.5" cy="2" r="2.4" fill="rgba(0,0,0,0.28)" />
+          <circle cx="13" cy="3.5" r="2.4" fill="rgba(0,0,0,0.28)" />
+          <!-- thumb folded -->
+          <ellipse cx="-19" cy="13" rx="6.5" ry="11.5" fill="url(#fist-grad)"
+            transform="rotate(-14 -19 13)" />
+          <ellipse cx="-23.5" cy="6" rx="2" ry="3.5" fill="rgba(180,255,210,0.18)"
+            transform="rotate(-14 -19 13)" />
+          <!-- animated middle finger -->
+          <g class="finger">
+            <rect x="-6.5" y="-44" width="13" height="42" rx="6" fill="url(#fist-grad)" />
+            <path d="M -4.5 -32 Q 0 -29 4.5 -32" stroke="rgba(0,0,0,0.3)" stroke-width="1.2" fill="none" stroke-linecap="round" />
+            <path d="M -4.5 -18 Q 0 -15 4.5 -18" stroke="rgba(0,0,0,0.3)" stroke-width="1.2" fill="none" stroke-linecap="round" />
+            <ellipse cx="0" cy="-38" rx="3.8" ry="2.3" fill="rgba(180,255,210,0.25)" />
+          </g>
+        </g>
+      </g>
+      <g class="orbit-mover orbit-fist-trail">
+        <g class="mini-fist" transform="rotate(14)">
+          <ellipse cx="0" cy="22" rx="22" ry="3" fill="rgba(0,0,0,0.45)" />
+          <rect x="-22" y="-2" width="13" height="11" rx="5.5" fill="url(#fist-grad)" />
+          <rect x="9" y="-2" width="13" height="11" rx="5.5" fill="url(#fist-grad)" />
+          <rect x="-22" y="6" width="44" height="20" rx="9" fill="url(#fist-grad)" />
+          <circle cx="-13" cy="3.5" r="2.4" fill="rgba(0,0,0,0.28)" />
+          <circle cx="-4.5" cy="2" r="2.4" fill="rgba(0,0,0,0.28)" />
+          <circle cx="4.5" cy="2" r="2.4" fill="rgba(0,0,0,0.28)" />
+          <circle cx="13" cy="3.5" r="2.4" fill="rgba(0,0,0,0.28)" />
+          <ellipse cx="-19" cy="13" rx="6.5" ry="11.5" fill="url(#fist-grad)"
+            transform="rotate(-14 -19 13)" />
+          <ellipse cx="-23.5" cy="6" rx="2" ry="3.5" fill="rgba(180,255,210,0.18)"
+            transform="rotate(-14 -19 13)" />
+          <g class="finger">
+            <rect x="-6.5" y="-44" width="13" height="42" rx="6" fill="url(#fist-grad)" />
+            <path d="M -4.5 -32 Q 0 -29 4.5 -32" stroke="rgba(0,0,0,0.3)" stroke-width="1.2" fill="none" stroke-linecap="round" />
+            <path d="M -4.5 -18 Q 0 -15 4.5 -18" stroke="rgba(0,0,0,0.3)" stroke-width="1.2" fill="none" stroke-linecap="round" />
+            <ellipse cx="0" cy="-38" rx="3.8" ry="2.3" fill="rgba(180,255,210,0.25)" />
+          </g>
         </g>
       </g>
     </svg>
@@ -160,24 +202,32 @@
   .orbit-mover {
     offset-path: path("M 1250 147 a 625 147 0 1 1 -1250 0 a 625 147 0 1 1 1250 0");
     offset-rotate: 0deg;
-    animation: orbit 16s linear infinite reverse;
+    animation: orbit 18s linear infinite reverse;
     will-change: offset-distance;
   }
+  /* Lead fist starts at 0, trail follows 12% behind on the same path */
+  .orbit-fist-lead  { animation-delay: 0s; }
+  .orbit-fist-trail { animation-delay: -2.16s; }
 
-  /* Spin lives on a child so the orbit translate and the axial rotate
-     don't fight over the parent's transform. */
-  .planet-spin {
-    animation: spin 5s linear infinite;
-    transform-origin: 0 0;
-    transform-box: view-box;
+  /* Middle finger fold/extend — offset between the two fists for variety */
+  .mini-fist .finger {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: fingerFold 2.6s cubic-bezier(0.5, 0, 0.3, 1) infinite;
     will-change: transform;
   }
+  .orbit-fist-trail .finger { animation-delay: -1.3s; }
 
   @keyframes orbit { to { offset-distance: 100%; } }
-  @keyframes spin  { to { transform: rotate(360deg); } }
+  @keyframes fingerFold {
+    0%, 14%   { transform: scaleY(0.06); }
+    44%, 64%  { transform: scaleY(1); }
+    90%, 100% { transform: scaleY(0.06); }
+  }
 
   @media (prefers-reduced-motion: reduce) {
-    .orbit-mover, .planet-spin, .pulse { animation: none; }
+    .orbit-mover, .mini-fist .finger, .pulse { animation: none; }
+    .mini-fist .finger { transform: scaleY(1); }
   }
 
   .inner {
