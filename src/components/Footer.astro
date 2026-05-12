@@ -1,0 +1,92 @@
+---
+import Logo from './Logo.astro';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="wrap inner">
+    <div class="brand">
+      <Logo />
+      <p class="muted">Independent web studio. Built carefully, shipped on time.</p>
+    </div>
+    <div class="cols">
+      <div>
+        <h4>Studio</h4>
+        <a href="#services">Services</a>
+        <a href="#work">Projects</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <a href="#services">Web design</a>
+        <a href="#services">Development</a>
+        <a href="#services">SEO & growth</a>
+        <a href="#contact">Free site audit</a>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <a href="#contact">Start a project</a>
+        <a href="https://cal.com/richiemac" rel="noopener">Book a call</a>
+        <a href="mailto:hello@richiemac.digital">hello@richiemac.digital</a>
+      </div>
+    </div>
+  </div>
+  <div class="wrap base">
+    <span class="muted">© {year} RichieMac · richiemac.digital</span>
+    <span class="muted">Designed & built with care</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--line);
+    background: var(--bg-2);
+    padding-top: clamp(3rem, 6vw, 5rem);
+  }
+  .inner {
+    display: grid;
+    grid-template-columns: 1.2fr 2fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+  }
+  .brand p {
+    margin-top: 1rem;
+    max-width: 32ch;
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+  .cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  h4 {
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+  .cols a {
+    display: block;
+    padding: 0.3rem 0;
+    color: var(--text);
+    font-size: 0.95rem;
+    transition: color 0.15s ease;
+  }
+  .cols a:hover { color: var(--green); }
+  .base {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--line);
+    font-size: 0.85rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  @media (max-width: 720px) {
+    .inner { grid-template-columns: 1fr; gap: 2rem; }
+    .cols { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>

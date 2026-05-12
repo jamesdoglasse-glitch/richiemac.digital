@@ -1,0 +1,50 @@
+---
+import Logo from './Logo.astro';
+---
+<header class="site-header">
+  <div class="wrap inner">
+    <Logo />
+    <nav aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#work">Projects</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQs</a>
+    </nav>
+    <a class="btn btn-primary cta" href="#contact">Start a project</a>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  .inner {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding-top: 0.9rem;
+    padding-bottom: 0.9rem;
+  }
+  nav {
+    display: flex;
+    gap: 1.5rem;
+    margin-left: 2rem;
+  }
+  nav a {
+    font-size: 0.92rem;
+    color: var(--muted);
+    transition: color 0.15s ease;
+  }
+  nav a:hover { color: var(--text); }
+  .cta { margin-left: auto; }
+  @media (max-width: 720px) {
+    nav { display: none; }
+    .cta { margin-left: auto; padding: 0.65rem 1rem; font-size: 0.88rem; }
+  }
+</style>

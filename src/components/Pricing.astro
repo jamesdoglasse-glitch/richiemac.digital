@@ -1,0 +1,145 @@
+---
+const tiers = [
+  {
+    name: 'Starter',
+    price: 'From £800',
+    blurb: 'One-page site that punches.',
+    items: [
+      'Single landing page',
+      'Custom design (no themes)',
+      'Contact form + Google Business setup',
+      '2-week turnaround',
+    ],
+    cta: 'Start small',
+    featured: false,
+  },
+  {
+    name: 'Growth',
+    price: 'From £2,800',
+    blurb: 'Full website + launch package.',
+    items: [
+      'Up to 8 pages',
+      'Brand refresh & wordmark',
+      'Technical SEO baked in',
+      'CMS + 30-day support',
+      '4–6 week build',
+    ],
+    cta: 'Most chosen',
+    featured: true,
+  },
+  {
+    name: 'Custom',
+    price: 'From £5,500',
+    blurb: 'Bespoke builds & integrations.',
+    items: [
+      'Unlimited pages',
+      'E-commerce, bookings, dashboards',
+      'Full brand strategy',
+      'AI / API integrations',
+      '90-day support',
+    ],
+    cta: 'Let’s talk',
+    featured: false,
+  },
+];
+---
+<section class="section" id="pricing">
+  <div class="wrap">
+    <header class="section-head">
+      <span class="section-num">03 —</span>
+      <h2 class="section-title">Investment</h2>
+      <p class="section-sub">
+        Fixed prices. No retainers, no hourly games. Pay 50% to start, 50% on launch.
+      </p>
+    </header>
+
+    <div class="grid">
+      {tiers.map((t) => (
+        <article class={`tier ${t.featured ? 'featured' : ''}`}>
+          {t.featured && <span class="badge">Most chosen</span>}
+          <h3>{t.name}</h3>
+          <p class="price">{t.price}</p>
+          <p class="blurb">{t.blurb}</p>
+          <ul>
+            {t.items.map((i) => <li>{i}</li>)}
+          </ul>
+          <a class={`btn ${t.featured ? 'btn-primary' : 'btn-ghost'}`} href="#contact">{t.cta}</a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    align-items: stretch;
+  }
+  .tier {
+    position: relative;
+    padding: 2rem;
+    border-radius: var(--radius);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .tier.featured {
+    border-color: var(--green);
+    background:
+      radial-gradient(120% 80% at 100% 0%, rgba(0, 230, 118, 0.14), transparent 55%),
+      var(--surface);
+  }
+  .badge {
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    background: var(--green);
+    color: #04140b;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    font-weight: 600;
+  }
+  .tier h3 {
+    font-size: 1.6rem;
+  }
+  .price {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text);
+  }
+  .blurb {
+    color: var(--muted);
+    margin: 0;
+  }
+  ul {
+    padding: 0;
+    margin: 0.5rem 0 1rem;
+    list-style: none;
+    flex: 1;
+  }
+  li {
+    padding: 0.55rem 0;
+    color: var(--text);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    border-bottom: 1px solid var(--line);
+  }
+  li::before {
+    content: '✓';
+    color: var(--green);
+    font-weight: 700;
+  }
+  li:last-child { border-bottom: none; }
+  .btn { align-self: flex-start; }
+</style>

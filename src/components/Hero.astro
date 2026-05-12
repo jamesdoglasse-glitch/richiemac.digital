@@ -1,0 +1,159 @@
+---
+---
+<section class="hero" id="top">
+  <div class="orbit" aria-hidden="true">
+    <div class="grid-bg"></div>
+    <div class="moon"></div>
+    <div class="ellipse"></div>
+  </div>
+
+  <div class="wrap inner">
+    <span class="status">
+      <span class="pulse" aria-hidden="true"></span>
+      Booking projects for July
+    </span>
+
+    <h1>
+      I build websites that
+      <span class="accent">PULL THEIR WEIGHT</span>
+    </h1>
+
+    <p class="lede">
+      Independent web studio crafting fast, modern sites for ambitious brands.
+      Less fluff, more pull — your site should win you customers, not babysit them.
+    </p>
+
+    <div class="ctas">
+      <a class="btn btn-primary" href="#contact">Start a project</a>
+      <a class="btn btn-ghost" href="#work">See selected work</a>
+    </div>
+
+    <p class="micro muted">
+      Most clients come to me with a site that's costing them visitors. I fix that.
+    </p>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(5rem, 11vw, 9rem) 0 clamp(4rem, 9vw, 7rem);
+    isolation: isolate;
+  }
+
+  .orbit {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .grid-bg {
+    position: absolute;
+    inset: -20% -10% -10%;
+    background-image:
+      linear-gradient(to right, rgba(0, 230, 118, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 230, 118, 0.06) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 60% 55% at 50% 45%, #000 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 60% 55% at 50% 45%, #000 30%, transparent 75%);
+  }
+
+  .ellipse {
+    position: absolute;
+    left: 50%;
+    top: 62%;
+    transform: translate(-50%, -50%);
+    width: min(1250px, 110vw);
+    aspect-ratio: 1250 / 294;
+    border: 1px dashed rgba(0, 230, 118, 0.22);
+    border-radius: 50%;
+  }
+
+  .moon {
+    position: absolute;
+    left: 50%;
+    top: 62%;
+    transform: translate(-50%, -50%);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 32% 30%, #b9ffd4, #00e676 55%, #008a3d);
+    box-shadow:
+      0 0 32px 4px rgba(0, 230, 118, 0.55),
+      inset -3px -2px 6px rgba(0, 0, 0, 0.35);
+    offset-path: path("M 625 147 a 625 147 0 1 1 -1250 0 a 625 147 0 1 1 1250 0");
+    offset-rotate: 0deg;
+    animation: orbit 16s linear infinite reverse;
+  }
+
+  @keyframes orbit {
+    to { offset-distance: 100%; }
+  }
+
+  .inner {
+    position: relative;
+    max-width: 980px;
+  }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: color-mix(in srgb, var(--surface) 70%, transparent);
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-bottom: 1.75rem;
+  }
+  .pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.7);
+    animation: pulse 1.8s ease-out infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.5); }
+    100% { box-shadow: 0 0 0 14px rgba(0, 230, 118, 0); }
+  }
+
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.5rem, 7vw, 5.6rem);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    font-weight: 600;
+  }
+  .accent {
+    display: inline;
+    background: linear-gradient(180deg, var(--green-soft) 0%, var(--green) 70%, var(--green-deep) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .lede {
+    margin-top: 1.6rem;
+    max-width: 56ch;
+    color: var(--muted);
+    font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+    line-height: 1.55;
+  }
+
+  .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2.25rem;
+  }
+
+  .micro {
+    margin-top: 2rem;
+    font-size: 0.88rem;
+  }
+</style>

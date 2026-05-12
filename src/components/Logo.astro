@@ -1,0 +1,40 @@
+---
+interface Props {
+  size?: number;
+}
+const { size = 18 } = Astro.props;
+---
+<a href="#top" class="logo" aria-label="RichieMac home">
+  <span class="dot" aria-hidden="true"></span>
+  <span class="wordmark">
+    <span class="r">richie</span><span class="m">mac</span><span class="tld">.digital</span>
+  </span>
+</a>
+
+<style define:vars={{ dotSize: `${size}px` }}>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text);
+  }
+  .dot {
+    width: var(--dotSize);
+    height: var(--dotSize);
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #b9ffd4, #00e676 55%, #008a3d);
+    box-shadow: 0 4px 14px -2px rgba(0, 230, 118, 0.55), inset -2px -2px 4px rgba(0, 0, 0, 0.35);
+    flex-shrink: 0;
+  }
+  .wordmark {
+    font-size: 1.02rem;
+    display: inline-flex;
+    align-items: baseline;
+  }
+  .r { color: var(--text); }
+  .m { color: var(--green); }
+  .tld { color: var(--muted); margin-left: 0.05em; font-weight: 500; }
+</style>

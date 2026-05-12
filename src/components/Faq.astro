@@ -1,0 +1,93 @@
+---
+const faqs = [
+  {
+    q: 'How long does a project usually take?',
+    a: 'A one-pager lands in about two weeks. A full site is 4–6 weeks. Custom builds depend on scope, but I quote a fixed timeline before we start so there are no surprises.',
+  },
+  {
+    q: 'What does the process look like?',
+    a: 'Free 20-minute call, then a written proposal with fixed price and timeline. Once you say go: discovery week, design rounds, build, launch. You see real progress every Friday.',
+  },
+  {
+    q: 'Do I own the site once it’s built?',
+    a: 'Yes — code, design files, hosting, domain. All of it. I hand you the keys at launch. No platform lock-in.',
+  },
+  {
+    q: 'I don’t have a logo or copy yet — is that a problem?',
+    a: 'Not at all. Brand and copy work can be bundled in. If you already have an in-house brand or a copywriter you love, I happily plug into that instead.',
+  },
+  {
+    q: 'Can you fix or rebuild an existing site?',
+    a: 'Yes. About half my work is rescues — slow, broken, or built on something that no longer fits the business. I’ll audit it free and tell you honestly whether to fix or rebuild.',
+  },
+  {
+    q: 'Why hire you instead of an agency?',
+    a: 'You talk to the person doing the work. Faster decisions, no account-management tax, no juniors learning on your dime. The flip side: I take a small number of clients at a time, so booking gets tight.',
+  },
+  {
+    q: 'Do you offer payment plans?',
+    a: 'Standard split is 50% to start, 50% on launch. For larger builds I’ll break it across milestones — happy to work to whatever fits your cashflow.',
+  },
+];
+---
+<section class="section" id="faq">
+  <div class="wrap">
+    <header class="section-head">
+      <span class="section-num">04 —</span>
+      <h2 class="section-title">Common questions</h2>
+      <p class="section-sub">
+        The things people ask before they hire me. Anything missing? Drop me a line.
+      </p>
+    </header>
+
+    <div class="list">
+      {faqs.map((f) => (
+        <details>
+          <summary>
+            <span>{f.q}</span>
+            <span class="chev" aria-hidden="true">+</span>
+          </summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .list {
+    border-top: 1px solid var(--line);
+  }
+  details {
+    border-bottom: 1px solid var(--line);
+  }
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.4rem 0.25rem;
+    cursor: pointer;
+    list-style: none;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+    font-weight: 500;
+    transition: color 0.15s ease;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary:hover { color: var(--green); }
+  .chev {
+    color: var(--green);
+    font-size: 1.4rem;
+    transition: transform 0.2s ease;
+    line-height: 1;
+  }
+  details[open] .chev { transform: rotate(45deg); }
+  details p {
+    color: var(--muted);
+    line-height: 1.65;
+    padding: 0 0.25rem 1.5rem;
+    margin: 0;
+    max-width: 70ch;
+  }
+</style>

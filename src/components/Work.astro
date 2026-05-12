@@ -1,0 +1,103 @@
+---
+const work = [
+  {
+    name: 'Northbeam Roastery',
+    tag: 'Brand + Shopify',
+    blurb: 'New identity and storefront for a Yorkshire roastery. +38% revenue in the first quarter live.',
+    status: 'live',
+  },
+  {
+    name: 'Slot reserved — June',
+    tag: 'Open',
+    blurb: 'One project slot open for a June kickoff. Get in touch if you want it.',
+    status: 'open',
+  },
+  {
+    name: 'Slot reserved — August',
+    tag: 'Open',
+    blurb: 'Booking projects starting August. Larger builds — happy to scope a free 20-min call.',
+    status: 'open',
+  },
+];
+---
+<section class="section" id="work">
+  <div class="wrap">
+    <header class="section-head">
+      <span class="section-num">02 —</span>
+      <h2 class="section-title">Selected work</h2>
+      <p class="section-sub">
+        I take on a handful of projects at a time. Quality over churn — every site gets full attention.
+      </p>
+    </header>
+
+    <div class="grid">
+      {work.map((w) => (
+        <article class={`tile ${w.status}`}>
+          <div class="tile-top">
+            <span class="tag">{w.tag}</span>
+            {w.status === 'live' && <span class="pip">● Live</span>}
+            {w.status === 'open' && <span class="pip open">○ Booking</span>}
+          </div>
+          <h3>{w.name}</h3>
+          <p>{w.blurb}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+  .tile {
+    position: relative;
+    padding: 2rem;
+    min-height: 240px;
+    border-radius: var(--radius);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    overflow: hidden;
+  }
+  .tile.live {
+    background:
+      radial-gradient(120% 100% at 0% 0%, rgba(0, 230, 118, 0.12), transparent 55%),
+      var(--surface);
+    border-color: color-mix(in srgb, var(--green) 25%, var(--line));
+  }
+  .tile.open {
+    background: repeating-linear-gradient(
+      135deg,
+      var(--surface) 0,
+      var(--surface) 14px,
+      var(--bg-2) 14px,
+      var(--bg-2) 28px
+    );
+  }
+  .tile-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .tag { color: var(--green); }
+  .pip { color: var(--green); }
+  .pip.open { color: var(--muted); }
+  .tile h3 {
+    font-size: 1.55rem;
+    margin-top: auto;
+  }
+  .tile p {
+    color: var(--muted);
+    line-height: 1.55;
+    margin: 0;
+  }
+</style>

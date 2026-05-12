@@ -1,0 +1,92 @@
+---
+const services = [
+  {
+    key: 'Design',
+    blurb: 'Brand, interface, and visual systems that look sharp and earn trust on the first scroll.',
+    items: ['Brand identity', 'UI / UX', 'Prototyping', 'Wordmarks & logos'],
+  },
+  {
+    key: 'Development',
+    blurb: 'Hand-built sites that load fast, rank well, and bend to whatever your business actually needs.',
+    items: ['Astro & Next.js', 'WordPress', 'Laravel & PHP', 'AI integrations'],
+  },
+  {
+    key: 'Growth',
+    blurb: 'The stuff that turns traffic into pipeline. Measurable, transparent, no smoke.',
+    items: ['Technical SEO', 'Paid acquisition', 'Local search', 'Analytics & CRO'],
+  },
+];
+---
+<section class="section" id="services">
+  <div class="wrap">
+    <header class="section-head">
+      <span class="section-num">01 —</span>
+      <h2 class="section-title">What I do</h2>
+      <p class="section-sub">
+        A small studio doing three things well, instead of a big one doing ten things badly.
+      </p>
+    </header>
+
+    <div class="grid">
+      {services.map((s) => (
+        <article class="card">
+          <h3>{s.key}</h3>
+          <p class="blurb">{s.blurb}</p>
+          <ul>
+            {s.items.map((i) => <li>{i}</li>)}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+  }
+  .card {
+    padding: 2rem;
+    border-radius: var(--radius);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .card:hover {
+    border-color: color-mix(in srgb, var(--green) 35%, var(--line));
+    transform: translateY(-2px);
+  }
+  .card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .blurb {
+    color: var(--muted);
+    line-height: 1.55;
+    margin: 0 0 1.5rem;
+  }
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+  li {
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--green);
+  }
+  li:last-child { border-bottom: none; }
+</style>
