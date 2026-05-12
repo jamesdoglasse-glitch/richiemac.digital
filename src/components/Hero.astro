@@ -203,20 +203,23 @@
     offset-path: path("M 1250 147 a 625 147 0 1 1 -1250 0 a 625 147 0 1 1 1250 0");
     offset-rotate: 0deg;
     animation: orbit 18s linear infinite reverse;
+    animation-delay: 2.5s;
     will-change: offset-distance;
   }
   /* Lead fist starts at 0, trail follows 12% behind on the same path */
-  .orbit-fist-lead  { animation-delay: 0s; }
-  .orbit-fist-trail { animation-delay: -2.16s; }
+  .orbit-fist-lead  { animation-delay: 2.5s; }
+  .orbit-fist-trail { animation-delay: 0.34s; } /* 2.5s - (18s * 0.12) */
 
   /* Middle finger fold/extend — offset between the two fists for variety */
   .mini-fist .finger {
     transform-box: fill-box;
     transform-origin: 50% 100%;
+    transform: scaleY(1);
     animation: fingerFold 2.6s cubic-bezier(0.5, 0, 0.3, 1) infinite;
+    animation-delay: 2.5s;
     will-change: transform;
   }
-  .orbit-fist-trail .finger { animation-delay: -1.3s; }
+  .orbit-fist-trail .finger { animation-delay: 1.2s; }
 
   @keyframes orbit { to { offset-distance: 100%; } }
   @keyframes fingerFold {
